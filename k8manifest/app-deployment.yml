@@ -1,0 +1,29 @@
+kind: Deployment
+metadata:
+  name: tms-app
+  namespace: tms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tms
+  template:
+    metadata:
+      labels:
+        app: tms
+    spec:
+      containers:
+      - name: tms
+        image: vaibhavpatil45/tms-nginx:1.0
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        env:
+          - name: DB_HOST
+            value: mysql
+          - name: DB_USER
+            value: root
+          - name: DB_PASS
+            value: root123
+          - name: DB_NAME
+            value: tms
